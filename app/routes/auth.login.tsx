@@ -70,12 +70,14 @@ interface FieldsProperty {
   password: string | null;
 }
 
+interface FieldsErrorProperty {
+  username: string | null | undefined;
+  password?: string | null | undefined;
+}
+
 interface FormData {
   fields: FieldsProperty;
-  fieldsError: {
-    username: string | null | undefined;
-    password?: string | null | undefined;
-  };
+  fieldsError: FieldsErrorProperty | string;
 }
 
 function validateUsername(username: string | null): string | null | undefined {
