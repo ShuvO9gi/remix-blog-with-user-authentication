@@ -7,6 +7,7 @@ import {
   useRouteError,
 } from "@remix-run/react";
 import { db } from "~/utils/db.server";
+import { getUser } from "~/utils/session.server";
 
 function validateTitle(title: string) {
   if (typeof title !== "string" || title.length < 3) {
@@ -25,6 +26,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   console.log(form);
   const title = form.get("title") as string | null;
   const body = form.get("body") as string | null;
+  const user = await getUser(request);
 
   if (title == null || body == null) {
     throw new Error("Title or Body is missing");
@@ -44,7 +46,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   }
 
   //submit to database
-  const post = await db.post.create({ data: fields });
+  const post = await db.post.create({ data: { ...fields, userId: user.id } });
 
   return redirect(`/posts/${post.id}`);
 };
