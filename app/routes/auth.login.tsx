@@ -133,7 +133,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       // Check if user exist
       const userExist = await db.user.findFirst({
         where: {
-          username,
+          username: username || "",
         },
       });
 
