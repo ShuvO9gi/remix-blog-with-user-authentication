@@ -1,4 +1,20 @@
-import type { MetaFunction } from "@remix-run/node";
+function Home() {
+  return (
+    <div>
+      <h1>Welcome To Remix!</h1>
+      <p>
+        Remix is a full stack web framework that lets you focus on the user
+        interface and work back through web standards to deliver a fast, slick,
+        and resilient user experience. People are gonna love using your stuff.
+      </p>
+    </div>
+  );
+}
+
+export default Home;
+
+/* default index page */
+/* import type { MetaFunction } from "@remix-run/node";
 
 export const meta: MetaFunction = () => {
   return [
@@ -39,3 +55,4 @@ export default function Index() {
     </div>
   );
 }
+ */
