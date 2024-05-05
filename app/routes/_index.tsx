@@ -7,6 +7,23 @@ function Home() {
         interface and work back through web standards to deliver a fast, slick,
         and resilient user experience. People are gonna love using your stuff.
       </p>
+      <p>
+        To learn more about Remix watch the video. <br />
+        Youtube Link: <br />
+        <strong>
+          <a href="https://www.youtube.com/watch?v=d_BhzHVV4aQ">Part 1</a>
+        </strong>{" "}
+        <br />
+        <strong>
+          <a
+            href="https://www.youtube.com/watch?v=wEoktJMSWLY"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Part 2(User Authentication)
+          </a>
+        </strong>
+      </p>
     </div>
   );
 }
