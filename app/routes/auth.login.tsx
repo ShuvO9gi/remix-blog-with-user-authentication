@@ -6,64 +6,6 @@ import {
   createUserSession,
   register,
 } from "~/utils/session.server";
-
-/* interface FormData {
-  fields?: {
-    loginType?: string | null | undefined;
-    username?: string | null | undefined;
-    password?: string | null | undefined;
-  };
-  fieldErrors?: {
-    username?: string | null | undefined;
-    password?: string | null | undefined;
-  };
-}
-
-interface FieldsProperty {
-  loginType?: string | null | undefined;
-  username?: string | null | undefined;
-  password?: string | null | undefined;
-}
-
-function validateUsername(username: string | null | undefined): string | null {
-  if (typeof username !== "string" || username.length < 3) {
-    return "Username must be at least 3 characters";
-  }
-  return null;
-}
-
-function validatePassword(password: string | null | undefined): string | null {
-  if (typeof password !== "string" || password.length < 6) {
-    return "Password must be at least 6 characters";
-  }
-  return null;
-}
-
-function badRequest(data: FormData) {
-  return json(data, { status: 400 });
-}
-
-export const action = async ({ request }: ActionFunctionArgs) => {
-  const form = await request.formData();
-
-  const loginType = form.get("loginType") as string | null | undefined;
-  const username = form.get("username") as string | null | undefined;
-  const password = form.get("password") as string | null | undefined;
-
-  const fields: FieldsProperty = { loginType, username, password };
-
-  const fieldErrors = {
-    username: validateUsername(username),
-    password: validatePassword(password),
-  };
-
-  if (Object.values(fieldErrors).some(Boolean)) {
-    return badRequest({ fieldErrors, fields });
-  }
-
-  return redirect("/posts");
-}; */
-
 interface FieldsProperty {
   loginType: string | null;
   username: string | null;
@@ -77,7 +19,8 @@ interface FieldsErrorProperty {
 
 interface FormData {
   fields: FieldsProperty;
-  fieldsError: FieldsErrorProperty | string;
+  fieldsError?: FieldsErrorProperty;
+  formError?: string;
 }
 
 function validateUsername(username: string | null): string | null | undefined {
@@ -87,7 +30,7 @@ function validateUsername(username: string | null): string | null | undefined {
 }
 
 function validatePassword(password: string | null) {
-  if (typeof password != "string" || password.length < 3) {
+  if (typeof password != "string" || password.length < 5) {
     return "Password must be at least 5 character long";
   }
 }
@@ -157,14 +100,14 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       if (!user) {
         return badRequest({
           fields,
-          fieldsError: "Something went wrong",
+          formError: "Something went wrong",
         });
       }
       // Create user session
       return createUserSession(user.id, "/posts");
     }
     default: {
-      return badRequest({ fields, fieldsError: "Login type is not valid!" });
+      return badRequest({ fields, formError: "Login type is not valid!" });
     }
   }
 

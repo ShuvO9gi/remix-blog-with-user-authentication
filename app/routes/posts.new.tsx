@@ -46,7 +46,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   }
 
   //submit to database
-  const post = await db.post.create({ data: { ...fields, userId: user.id } });
+  const post = await db.post.create({
+    data: { ...fields, userId: user?.id ?? "" },
+  });
 
   return redirect(`/posts/${post.id}`);
 };

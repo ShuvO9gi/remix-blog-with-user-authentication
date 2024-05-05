@@ -17,7 +17,8 @@ import { LoaderFunctionArgs } from "@remix-run/node";
 export const links = () => [{ rel: "stylesheet", href: globalStylesUrl }];
 
 export const meta = () => {
-  const description = "A awesome Remix blog page";
+  const description =
+    "A awesome Remix blog page. Youtube Link: Part1-(https://www.youtube.com/watch?v=d_BhzHVV4aQ)";
   const keywords = "remix, react, javascript";
   return [{ description, keywords }];
 };
